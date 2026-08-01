@@ -49,7 +49,7 @@ The design contains:
 
 | Device	| GPIO		| Channel | Base Address |
 |---------------|---------------|---------|--------------|
-| LEDs 		| GPIO 0 	| 1 	  | `0x41200000` |
+| LEDs		| GPIO 0 	| 1 	  | `0x41200000` |
 | Switches 	| GPIO 0 	| 2       | `0x41200000` |
 | RGB LED 	| GPIO 1 	| 1 	  | `0x41210000` |
 | Buttons 	| GPIO 1 	| 1 	  | `0x41210000` |
