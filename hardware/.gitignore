@@ -1,0 +1,7 @@
+#Vivado ignores
+*.log
+*.jou
+*.str
+*.tmp
+*.xsa
+baseSystem/
