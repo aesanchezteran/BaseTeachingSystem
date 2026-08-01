@@ -47,17 +47,16 @@ The design contains:
 
 # Memory Map
 
-| Device | GPIO | Channel | Base Address |
-|----------|----------|----------|----------|
-| LEDs | GPIO 0 | 1 | `0x41200000` |
-| Switches | GPIO 0 | 2 | `0x41200000` |
-| RGB LED | GPIO 1 | 1 | `0x41210000` |
-| Buttons | GPIO 1 | 1 | `0x41210000` |
-| Keypad | GPIO 2 | 1 | `0x41220000` |
-| AXI Timer 0 | N/A | N/A | `0x42800000` |
-| XADC | N/A | N/A | `0x43C00000` |
+| Device	| GPIO		| Channel | Base Address |
+|---------------|---------------|---------|--------------|
+| LEDs 		| GPIO 0 	| 1 	  | `0x41200000` |
+| Switches 	| GPIO 0 	| 2       | `0x41200000` |
+| RGB LED 	| GPIO 1 	| 1 	  | `0x41210000` |
+| Buttons 	| GPIO 1 	| 1 	  | `0x41210000` |
+| Keypad 	| GPIO 2 	| 1 	  | `0x41220000` |
+| AXI Timer 0 	| N/A 		| N/A 	  | `0x42800000` |
+| XADC 		| N/A 		| N/A 	  | `0x43C00000` |
 
-【1-ec5e19】
 
 ---
 
@@ -96,9 +95,6 @@ The design contains:
 | rows_0[2] | JE8 | U17 |
 | rows_0[1] | JE9 | T17 |
 | rows_0[0] | JE10 | Y17 |
-
-【1-ec5e19】
-
 ---
 
 # Interrupt Assignments
@@ -111,14 +107,7 @@ The design contains:
 | AXI Timer | 64 |
 | XADC | 65 |
 
-【1-ec5e19】
-
 ---
 
 # Restoring the Project
 
-## Vivado
-
-```bash
-git clone <repository-url>
-cd <repository>
