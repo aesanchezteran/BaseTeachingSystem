@@ -1,65 +1,124 @@
-readme_content = """# Zybo Z7-10 Base Teaching System Configuration
+# Zybo Z7-10 Base Teaching System
 
-[![Board: Digilent Zybo Z7-10](https://img.shields.io/badge/Board-Digilent_Zybo_Z7--10-blue)](https://digilent.com/reference/programmable-logic/zybo-z7/start)
-[![Toolchain: Vivado / Vitis 2025.2](https://img.shields.io/badge/Toolchain-Vivado_%2F_Vitis_2025.2-orange)](https://www.xilinx.com/products/design-tools/vivado.html)
-[![Course: IEE 5002E](https://img.shields.io/badge/Course-IEE_5002E_Programmable_Systems-green)](https://www.usfq.edu.ec/)
-[![Institution: USFQ](https://img.shields.io/badge/Institution-USFQ_Engineering-red)](https://www.usfq.edu.ec/)
+Base hardware platform used in the **IEE 5002E - Programmable Systems** course at **Universidad San Francisco de Quito (USFQ)**.
 
-## Document Control & Metadata
+## Overview
 
-| Attribute | Details |
-| :--- | :--- |
-| **Department** | Engineering / EP USFQ |
-| **Document Title** | Base Zybo Z7-10 System Configuration & Isolated Voltage Measurement Calculation |
-| **Document Code** | `SENSEVOLT-EP-USFQ-ESE-001` |
-| **Revision Number** | `0` |
-| **Release Date** | July 28, 2025 |
-| **Distribution Control** | Controlled Document (EP USFQ) |
+This repository contains the base hardware design for the Digilent Zybo Z7-10 board used for teaching embedded and programmable system design.
 
----
+The platform provides:
 
-## Table of Contents
-1. [Objective](#1-objective)
-2. [Scope](#2-scope)
-3. [References](#3-references)
-4. [System Architecture & Block Diagram](#4-system-architecture--block-diagram)
-5. [System Memory Map](#5-system-memory-map)
-6. [Interrupt Mapping](#6-interrupt-mapping)
-7. [PMOD & Pin Mapping](#7-pmod--pin-mapping)
-8. [GitHub Project Restoration & Setup](#8-github-project-restoration--setup)
-9. [Vitis 2025.2 Examples](#9-vitis-20252-examples)
-10. [License & Distribution](#10-license--distribution)
+- Zynq-7000 Processing System
+- AXI GPIO peripherals
+- AXI Timer
+- XADC Interface
+- Keypad Interface
+- PMOD Connectivity
+- Interrupt Infrastructure
+
+The exported XSA generated from this project can be used as the hardware platform for Vitis-based software development.
+
+## Objective
+
+This project defines the base Zybo Z7-10 hardware configuration used in the IEE 5002E Programmable Systems course at USFQ. 【1-ec5e19】
+
+## Scope
+
+The information in this repository applies to the XSA platform distributed to students. Advanced users may also restore and modify the original Vivado project for debugging, customization, or hardware development. 【1-ec5e19】
 
 ---
 
-## 1. Objective
+# System Architecture
 
-This repository contains the hardware architecture description, block design specifications, memory map definitions, PMOD pin assignments, and board support setup for the **Zybo Z7-10 Base Teaching System**. 
+## Block Diagram
 
-This system configuration is specifically designed for practical coursework, real-time hardware debugging, and embedded firmware development in the **IEE 5002E: Programmable Systems** course offered by the Department of Engineering at **Universidad San Francisco de Quito (USFQ)**.
+> Insert exported Vivado block diagram image here.
 
----
+The design contains:
 
-## 2. Scope
-
-- **Target Hardware Platform**: Digilent Zybo Z7-10 (featuring the AMD/Xilinx Zynq-7000 All Programmable SoC, `XC7Z010-1CLG400C`).
-- **Target Design Suite**: AMD Vivado ML Edition & Vitis Unified Software Platform **2025.2**.
-- **Hardware Handoff File**: Details and configuration relative to the `.xsa` (Xilinx Shell Architecture) container provided to course students.
-- **Hardware Debugging**: Embedded Integrated Logic Analyzer (`ila_0`) configured for real-time logic analysis of the matrix keypad peripheral decoder interface.
-- **Project Restoration**: Instructions to recreate the Vivado IP Integrator project from repository source scripts.
-
----
-
-## 3. References
-
-1. Digilent Zybo Z7 Reference Manual & Board Files (*Digilent Inc.*)
-2. AMD/Xilinx Zynq-7000 SoC Technical Reference Manual (UG585)
-3. AMD/Xilinx 7 Series FPGAs and Zynq-7000 SoC XADC Dual 12-Bit 1 MSPS Analog-to-Digital Converter User Guide (UG480)
-4. Course Reference: *IEE 5002E Programmable Systems*, Department of Engineering, USFQ.
-5. Technical Document Reference: `SENSEVOLT-EP-USFQ-ESE-001` (*Memoria de Cálculo del Circuito de Medición de Voltaje Aislado*)
+- Zynq Processing System
+- AXI Interconnect
+- AXI GPIO peripherals
+- AXI Timer
+- XADC Wizard
+- Custom peripheral interfaces
 
 ---
 
-## 4. System Architecture & Block Diagram
+# Memory Map
 
-The teaching platform integrates the Zynq-7000 Processing System (PS7) with custom and standard AMD/Xilinx AXI IP cores inside the Programmable Logic (PL), connected via an AXI SmartConnect interconnect (`axi_smc`).
+| Device | GPIO | Channel | Base Address |
+|----------|----------|----------|----------|
+| LEDs | GPIO 0 | 1 | `0x41200000` |
+| Switches | GPIO 0 | 2 | `0x41200000` |
+| RGB LED | GPIO 1 | 1 | `0x41210000` |
+| Buttons | GPIO 1 | 1 | `0x41210000` |
+| Keypad | GPIO 2 | 1 | `0x41220000` |
+| AXI Timer 0 | N/A | N/A | `0x42800000` |
+| XADC | N/A | N/A | `0x43C00000` |
+
+【1-ec5e19】
+
+---
+
+# PMOD Mapping
+
+## XADC Connections
+
+| Signal | Connector | Pins |
+|----------|----------|----------|
+| XADC AD14 | PMOD A / JXADC | JXADC1(P), JXADC7(N) |
+| XADC AD7 | PMOD A / JXADC | JXADC2(P), JXADC8(N) |
+| XADC AD15 | PMOD A / JXADC | JXADC3(P), JXADC9(N) |
+| XADC AD6 | PMOD A / JXADC | JXADC4(P), JXADC10(N) |
+
+## PMOD D
+
+| Signal | PMOD Pin | FPGA Pin |
+|----------|----------|----------|
+| convst_in_0 | JD1 | T14 |
+| eoc_out_0 | JD2 | P14 |
+| UART_0_0_rxd | JD3 | U14 |
+| pwm0_0 | JD4 | V17 |
+| busy_out_0 | JD7 | T15 |
+| eos_out_0 | JD8 | R14 |
+| UART_0_0_txd | JD9 | U15 |
+
+## PMOD E (Keypad Interface)
+
+| Signal | PMOD Pin | FPGA Pin |
+|----------|----------|----------|
+| cols_0[3] | JE1 | V12 |
+| cols_0[2] | JE2 | W16 |
+| cols_0[1] | JE3 | J15 |
+| cols_0[0] | JE4 | H15 |
+| rows_0[3] | JE7 | V13 |
+| rows_0[2] | JE8 | U17 |
+| rows_0[1] | JE9 | T17 |
+| rows_0[0] | JE10 | Y17 |
+
+【1-ec5e19】
+
+---
+
+# Interrupt Assignments
+
+| Device | Interrupt ID |
+|----------|----------|
+| GPIO 0 | 61 |
+| GPIO 1 | 62 |
+| GPIO 2 | 63 |
+| AXI Timer | 64 |
+| XADC | 65 |
+
+【1-ec5e19】
+
+---
+
+# Restoring the Project
+
+## Vivado
+
+```bash
+git clone <repository-url>
+cd <repository>
