@@ -4,5 +4,6 @@
 *.str
 *.tmp
 *.xsa
+*.bd
 bd/
 baseSystem/
