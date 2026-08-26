@@ -47,16 +47,16 @@ module scaningfsm( input logic clk,
  
          // state definitions
          typedef enum logic [3:0] {S0,S1,S2,S3,S4,S5,S6,S7,S8} statetype;
-         statetype state, nextstate;
+         statetype instate, nextstate;
  
                     // state register
                     always_ff @(posedge clk)
-                        if(~rstn) state <= S0;
-                        else if(strb) state <= nextstate;
+                        if(~rstn) instate <= S0;
+                        else if(strb) instate <= nextstate;
                         
                     //next state logic
                     always_comb 
-                        case(state)
+                        case(instate)
                             S0: if(&rows)   nextstate = S0;
                                 else        nextstate = S1;
                             S1: if(&rows)   nextstate = S2;
@@ -80,7 +80,7 @@ module scaningfsm( input logic clk,
                             
                     // output logic
                     always_comb
-                        case(state)
+                        case(instate)
                             S0: begin cols = 4'h0; valid = 1'b0; end
                             S1: begin cols = 4'he; valid = 1'b0; end
                             S2: begin cols = 4'hd; valid = 1'b0; end
@@ -96,7 +96,7 @@ module scaningfsm( input logic clk,
 /********************************************************************
 *                             END --  Scanning FSM                  *
 *********************************************************************/    
-
+                        assign state = instate;
 endmodule
 
 
