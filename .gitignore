@@ -6,4 +6,21 @@
 *.xsa
 *.bd
 bd/
-baseSystem/
+project_1/
+
+#Vitis ignores
+.metadata/
+.cache/
+*.log
+*.jou
+*.elf
+*.o
+*.a
+*.so
+Debug/
+Release/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
