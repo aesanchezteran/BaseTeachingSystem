@@ -8,6 +8,9 @@
 bd/
 project_1/
 
+#software ignore for vitis tutorial
+software/
+
 #Vitis ignores
 .metadata/
 .cache/
