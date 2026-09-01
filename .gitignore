@@ -5,8 +5,8 @@
 *.tmp
 *.xsa
 *.bd
-bd/
 project_1/
+bd/
 
 #software ignore for vitis tutorial
 software/
