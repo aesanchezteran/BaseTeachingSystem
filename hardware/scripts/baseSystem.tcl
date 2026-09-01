@@ -53,7 +53,7 @@ proc checkRequiredFiles { origin_dir} {
   return $status
 }
 # Set the reference directory for source file relative paths (by default the value is script directory path)
-set origin_dir "/home/alberto/Xilinx/ZyboZ7-10/baseSystem/hardware"
+set origin_dir "./"
 
 # Use origin directory path location variable, if specified in the tcl shell
 if { [info exists ::origin_dir_loc] } {
